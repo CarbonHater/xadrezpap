@@ -1,17 +1,17 @@
 /* 
-Classe Jogo
-
-Esta é uma classe JavaScript que modela um jogo de xadrez.
-Ele tem dois atributos principais: thisPlayersColorIsWhite e chessBoard.
-O primeiro é uma flag boolean que indica se o jogador a jogar é branco ou preto.
-O segundo é a representação atual do tabuleiro de xadrez.
-
-O construtor da classe Game inicializa esses atributos e também cria um objeto chess usando a biblioteca chess.js.
-Além disso, ele cria vários mapeamentos para ajudar a traduzir coordenadas entre as representações
-do tabuleiro do jogo e as representações de movimentos de peças no objeto chess.
-
-A classe tem vários métodos incluindo getBoard, que retorna o estado atual do tabuleiro, e movePiece, que move uma peça no tabuleiro.
-Este método usa o objeto chess para verificar se o movimento é válido antes de atualizar o estado do tabuleiro.
+* Classe Jogo
+*
+* Esta é uma classe JavaScript que modela um jogo de xadrez.
+* Ele tem dois atributos principais: thisPlayersColorIsWhite e chessBoard.
+* O primeiro é uma flag boolean que indica se o jogador a jogar é branco ou preto.
+* O segundo é a representação atual do tabuleiro de xadrez.
+*
+* O construtor da classe Game inicializa esses atributos e também cria um objeto chess usando a biblioteca chess.js.
+* Além disso, ele cria vários mapeamentos para ajudar a traduzir coordenadas entre as representações
+* do tabuleiro do jogo e as representações de movimentos de peças no objeto chess.
+*
+* A classe tem vários métodos incluindo getBoard, que retorna o estado atual do tabuleiro, e movePiece, que move uma peça no tabuleiro.
+* Este método usa o objeto chess para verificar se o movimento é válido antes de atualizar o estado do tabuleiro.
 */
 
 // importa os outros ficheiros e a biblioteca chess.js
@@ -22,12 +22,7 @@ import Square from './square'
 // Quando indexar, lembra-se: [y][x]. 
 // Se a cor do jogador for preta, inverter o tabuleiro.
 
-
-
-
-
 class Game {
-
     // constructor para definir a posição das peças e do tabuleiro em função do jogador (branco ou preto). O tabuleiro esta invertido para o outro jogador.
     constructor(thisPlayersColorIsWhite) {
         // uma vez inicializado, esse valor nunca deve mudar.
@@ -38,17 +33,17 @@ class Game {
         this.chess = new Chess()
 
 
-        // define as coordonadas de cada peça.
-        // se o jogador e branco, as peças brancas e pretas não têm as mesmas coordenadas do que o jogador preto.
-        //
-        // toCoord = coordonadas numerais das peças brancas
-        // toAlphabet = coordonadas alphabeticas das peças brancas
-        // toCoord2 = coordonadas numerais das peças pretas
-        // toAlphabet2 = coordonadas alphabeticas das peças pretas
-        // cada peça tem como coordenadas um numero e uma letra. exemplo: a1
-        //
-        // mais sobre o ternary operator "?" -> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
-        
+        /* define as coordonadas de cada peça.
+        * se o jogador e branco, as peças brancas e pretas não têm as mesmas coordenadas do que o jogador preto.
+        *
+        * toCoord = coordonadas numerais das peças brancas
+        * toAlphabet = coordonadas alphabeticas das peças brancas
+        * toCoord2 = coordonadas numerais das peças pretas
+        * toAlphabet2 = coordonadas alphabeticas das peças pretas
+        * cada peça tem como coordenadas um numero e uma letra. exemplo: a1
+        *
+        * mais sobre o ternary operator "?" -> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
+        */
         this.toCoord = thisPlayersColorIsWhite ? {
             0:8, 1:7, 2: 6, 3: 5, 4: 4, 5: 3, 6: 2, 7: 1
         } : {
@@ -89,22 +84,27 @@ class Game {
 
     movePiece(pieceId, to, isMyMove) {
         /*
-* A  O método movePiece é usado para mover uma peça de xadrez no tabuleiro.
-
-Ele primeiro mapeia a posição no tabuleiro para coordenadas bidimensionais (to2D), dependendo se o movimento é feito pelo jogador atual (isMyMove). Em seguida, ele recupera o tabuleiro atual e encontra a posição atual da peça (peçaCoordenadas) chamando this.findPiece.
-
-Se a peça não for encontrada no tabuleiro, o método retorna imediatamente. Se a peça for encontrada, calcula a nova posição (to_y, to_x) com base em to2D e no parâmetro to. Em seguida, ele usa a biblioteca de xadrez para verificar se o movimento é válido. Se o movimento não for válido, o método retorna "movimento inválido".
-
-Se o movimento for válido, ele verifica se é uma promoção de peão chamando this.isPawnPromotion. Se a promoção for válida, o método promove o peão a rainha, caso contrário, faz a jogada.
-
-Em seguida, ele verifica se o movimento resultou em um roque chamando this.isCastle. Nesse caso, ele move a torre para sua nova posição. Por fim, o método atualiza o modelo do tabuleiro definindo a nova posição da peça e removendo a posição original da peça. Se um jogador tentar capturar sua própria peça, o método retornará "usuário tentou capturar sua própria peça". O método também mostra a vez do jogador atual e se o jogador está em xeque-mate.
-
-* 
-*
-* -
-* -
-* -
-*/
+        * O método movePiece é usado para mover uma peça de xadrez no tabuleiro.
+        *
+        * Em primeiro lugar, o método mapeia a posição no tabuleiro para coordenadas bidimensionais (to2D),
+        * dependendo de se o movimento é feito pelo jogador atual (isMyMove).
+        *  
+        * em segundo lugar, recupera o tabuleiro atual e encontra a posição atual da peça (peçaCoordenadas) com "this.findPiece".
+        * Se a peça não for encontrada no tabuleiro, o método retorna imediatamente.
+        * Se a peça for encontrada, calcula a nova posição (to_y, to_x) com base em to2D e no parâmetro "to".
+        * 
+        * Depois, usa a biblioteca de xadrez para verificar se o movimento é válido.
+        * Se o movimento não for válido, o método retorna "invalid move" (movimento inválido).
+        * Se o movimento for válido, ele verifica se é uma promoção de peão com "this.isPawnPromotion".
+        * Se a promoção for válida, o método promove o peão a rainha, caso contrário, faz a jogada.
+        * 
+        * Finalemente, ele verifica se o movimento resultou em um roque com "this.isCastle".
+        * Nesse caso, ele move a torre para sua nova posição.
+        * O método atualiza o modelo do tabuleiro, defina a nova posição da peça e remove a posição original da peça.
+        * Se um jogador tenta mexer para a sua própria posição, o método retornará "moved in the same position." (utilizador tentou mexer na mesma posição).
+        * Se um jogador tenta capturar sua própria peça, o método retornará "user tried to capture their own piece" (utilizador tentou capturar sua própria peça). 
+        * O método também mostra a vez do jogador atual e se o jogador está em xeque-mate.
+        */
       
         const to2D = this.getTo2D(isMyMove);
         var currentBoard = this.getBoard()
@@ -119,7 +119,7 @@ Em seguida, ele verifica se o movimento resultou em um roque chamando this.isCas
         const y = pieceCoordinates[1]
         const x = pieceCoordinates[0]
 
-        // new coordinates
+        // novas coordenadas
         const to_y = to2D[to[1]]
         const to_x = to2D[to[0]]
 
@@ -143,7 +143,7 @@ Em seguida, ele verifica se o movimento resultou em um roque chamando this.isCas
 
         this.handleMoveAttempt(moveAttempt, currentBoard);
 
-        // Check castling
+        // Verificar roque
         const castle = this.isCastle(moveAttempt)
 
         if (castle.didCastle) {
@@ -185,7 +185,8 @@ Em seguida, ele verifica se o movimento resultou em um roque chamando this.isCas
         if (checkMate === " has been checkmated") {
             return this.chess.turn() + checkMate
         }
-        // changes the fill color of the opponent's king that is in check
+
+        // "altera a cor de preenchimento do rei do adversário que está em xeque"
         const check = this.chess.in_check() ? " is in check" : " is not in check"
         console.log(this.chess.turn() + check)
         if (check === " is in check") {
@@ -197,6 +198,12 @@ Em seguida, ele verifica se o movimento resultou em um roque chamando this.isCas
     }
 
     getTo2D(isMyMove) {
+        /* 
+        * Este método recebe um argumento booleano isMyMove e retorna um objeto literal.
+        * Dependendo do valor de isMyMove, ele retorna um dos dois objetos a seguir
+        * 
+        * o primeiro int é a posição (em pixeis) da linha no tabuleiro o segundo int é o numero da linha correspondente
+        */
         return isMyMove ? {
             105:0, 195:1, 285: 2, 375: 3, 465: 4, 555: 5, 645: 6, 735: 7
         } : {
@@ -205,6 +212,20 @@ Em seguida, ele verifica se o movimento resultou em um roque chamando this.isCas
     }
 
     makeMove(x, y, to2D, to, pieceId, isPromotion) {
+        /*
+        * x e y: as coordenadas x e y da peça que o jogador deseja mover
+        * to2D: um objeto que representa o mapeamento da coordenada x para uma coluna em um tabuleiro de xadrez
+        * para: uma matriz contendo as coordenadas x e y do quadrado de destino no tabuleiro de xadrez
+        * pieceId: uma string que representa o tipo de peça (por exemplo, 'P' para peão)
+        * isPromotion: um valor booleano que indica se a jogada é ou não uma promoção de peão 
+        * 
+        * A função usa o método chess.move de a biblioteca chess.js para fazer uma jogada no tabuleiro de xadrez.
+        * O movimento é construído a partir dos parâmetros de entrada usando as propriedades "from", "to" e "piece".
+        * 
+        * Se "isPromotion" for verdadeiro, o movimento é modificado adicionando uma propriedade de promoção com o valor 'q' (promovendo o peão a uma rainha).
+        * Finalmente, o método chess.move é chamado para fazer a jogada e o resultado é retornado.
+        */
+
         return !isPromotion ? this.chess.move({
             from: this.toChessMove([x, y], to2D),
             to: this.toChessMove(to, to2D),
@@ -219,6 +240,26 @@ Em seguida, ele verifica se o movimento resultou em um roque chamando this.isCas
     }
 
     handleMoveAttempt (moveAttempt, currentBoard) {
+        /*
+        * Este método é usado para lidar com uma tentativa de movimento.
+        * O parámetro "moveAttempt" é um objeto que representa o movimento que está a ser tentado. 
+        * "currentBoard" é um array bidimensional que representa o estado atual do tabuleiro de xadrez.
+        * 
+        * O método verifica se o movimento tem um sinalizador 'e'.
+        * Se o sinalizador for 'e', ele executa as seguintes etapas:
+        * 
+        * Extrai o quadrado alvo do movimento com "moveAttempt.to".
+        * 
+        * Converte a coluna do quadrado de destino de uma letra para um número com "this.toAlphabet2".
+        * 
+        * Calcula a linha do quadrado de destino com base no fato de o movimento ser feito pelo jogador branco ou preto.
+        * Para o jogador branco, a classificação é calculada como parseInt(move[1], 10) - 1.
+        * Para o jogador preto, é calculada como parseInt(move[1], 10) + 1.
+        * 
+        * Limpa a peça do quadrado de destino chamando o método setPiece do elemento correspondente em "currentBoard" com um argumento nulo.
+        * A linha e a coluna são encontradas com "this.toCoord2", que mapeia números para strings.
+        */
+        
         if (moveAttempt.flags === 'e') {
             const move = moveAttempt.to 
             const x = this.toAlphabet2[move[0]]
@@ -233,16 +274,7 @@ Em seguida, ele verifica se o movimento resultou em um roque chamando this.isCas
     }
 
     isCastle(moveAttempt) {
-        /**
-         * Assume moveAttempt is legal. 
-         * 
-         * {moveAttempt} -> {boolean x, y to_x, to_y} 
-         * 
-         * returns if a player has castled, the final position of 
-         * the rook (to_x, to_y), and the original position of the rook (x, y)
-         * 
-         */
-
+        // Verifica se um movimento feito por um jogador é um movimento de roque.
 
         const piece = moveAttempt.piece
         const move = {from: moveAttempt.from, to: moveAttempt.to}
@@ -286,11 +318,13 @@ Em seguida, ele verifica se o movimento resultou em um roque chamando this.isCas
 
 
     isPawnPromotion(to, piece) {
-        const res = piece === 'p' && (to[1] === 105 || to[1] === 735)
-        if (res) {
+        // Verifica se um movimento feito por um jogador é uma promoção de pião.
+
+        const isPromoted = piece === 'p' && (to[1] === 105 || to[1] === 735)
+        if (isPromoted) {
             this.nQueens += 1
         }
-        return res
+        return isPromoted
     }
 
 
@@ -303,14 +337,12 @@ Em seguida, ele verifica se o movimento resultou em um roque chamando this.isCas
         } else {
             move = this.toAlphabet[finalPosition[0]] + this.toCoord[finalPosition[1]]
         }
-       
-       //  console.log("proposed move: " + move)
         return move
     }
 
     findPiece(board, pieceId) {
-        // ChessBoard, String -> [Int, Int]
-        // Obter o numero de identificação da peça jogada 
+        // Obter o numero de identificação da peça jogada
+
         for (var i = 0; i < 8; i++) {
             for (var j = 0; j < 8; j++) {
                 if (board[i][j].getPieceIdOnThisSquare() === pieceId) {
@@ -321,13 +353,21 @@ Em seguida, ele verifica se o movimento resultou em um roque chamando this.isCas
     }
 
     makeStartingBoard() {
+        /*
+        * Este método cria o tabuleiro inicial para o jogo de xadrez.
+        * Cria um array 2D 8x8 chamado "startingChessBoard" e o preenche com quadrados vazios representados por instâncias da classe "Square".
+        * As fileiras de trás para as peças pretas e brancas são então adicionadas às linhas superior e inferior do tabuleiro, respectivamente.
+        * O tipo e a cor da peça são determinados pelo array "backRank" e pela propriedade "thisPlayersColorIsWhite".
+        * 
+        * O método retorna o "startingChessBoard".
+        */
         const backRank = ["rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"]
         var startingChessBoard = []
         for (var i = 0; i < 8; i++) {
             startingChessBoard.push([])
             for (var j = 0; j < 8; j++) {
-                // j is horizontal
-                // i is vertical
+                // j é horizontal
+                // i é vertical
                 const coordinatesOnCanvas = [((j + 1) * 90 + 15), ((i + 1) * 90 + 15)]
                 const emptySquare = new Square(j, i, null, coordinatesOnCanvas)
                 
@@ -340,7 +380,6 @@ Em seguida, ele verifica se o movimento resultou em um roque chamando this.isCas
             for (var i = 0; i < 8; i++) {
                 if (j == 0) {
                     // top
-                    // console.log(backRank[i])
                     startingChessBoard[j][this.thisPlayersColorIsWhite ? i : 7 - i].setPiece(new ChessPiece(backRank[i], false, this.thisPlayersColorIsWhite ? "black" : "white", this.thisPlayersColorIsWhite ? blackBackRankId[i] : whiteBackRankId[i]))
                     startingChessBoard[j + 1][this.thisPlayersColorIsWhite ? i : 7 - i].setPiece(new ChessPiece("pawn", false, this.thisPlayersColorIsWhite ? "black" : "white", this.thisPlayersColorIsWhite ? "bp" + i : "wp" + i))
                 } else {
