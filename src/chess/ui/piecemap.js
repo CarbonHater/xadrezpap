@@ -1,5 +1,7 @@
 // Link das imagens das peças do jogo de xadrez 
 
+// no futuro, será possivel utilizar as minhas imagens.
+
 // export para poder utilisar nos outros ficheiros
 export default {
     'pawn': ['https://upload.wikimedia.org/wikipedia/commons/0/04/Chess_plt60.png', 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Chess_pdt60.png'],

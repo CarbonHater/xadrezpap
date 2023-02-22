@@ -1,11 +1,10 @@
-
 // import necessários para este ficheiro
 import React from 'react'
 import { Image } from 'react-konva';
 import useImage from 'use-image'
 
 const Piece = (props) => {
-    /* isto é um componente React que exibe uma peça de xadrez no tabuleiro. O componente recebe várias propriedades como "props":
+    /* isto é um componente React que exibe uma peça de xadrez no tabuleiro. O componente recebe o componente "props"
     *
     * "props.isWhite" determina a cor da peça (branco ou preto).
     * "props.imgurls" é um array que contém as URLs das imagens das peças brancas e pretas.

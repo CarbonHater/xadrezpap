@@ -10,7 +10,6 @@ import Piece from './piece'
 import piecemap from './piecemap'
 import { useParams } from 'react-router-dom'
 import { ColorContext } from '../../context/colorcontext' 
-import VideoChatApp from '../../connection/videochat'
 
 // socket.io
 const socket  = require('../../connection/socket').socket
@@ -18,15 +17,24 @@ const socket  = require('../../connection/socket').socket
 class ChessGame extends React.Component {
 
     /*
-    * The class ChessGame extends React.Component and represents a game of chess. It has state information about the current state of the game, including the current game state, which piece is being dragged, whose turn it is to move, and if either the white or black king is in check.
-    *
-    * It listens to events from a websocket and updates the state of the game when it receives a move from the opponent.
-    *
-    * The class has functions for starting and ending a drag of a piece, for moving a piece, and for reverting the state to the previous one if an invalid move is made. It also updates the game state and checks if the game is over. The game state is updated with the results of a move and information about check and checkmate.
-    */
+    * A classe Jogo de Xadrez estende "React.Component" e representa um jogo de xadrez.
+    * Tem informações sobre o estado atual do jogo: 
+    * - qual peça está sendo arrastada
+    * - de quem é a vez de mover 
+    * - se o rei branco ou preto está em xeque.
+    * 
+    * Também escuta eventos de um websocket e atualiza o estado do jogo quando recebe uma jogada do oponente.
+    * 
+    * A classe tem funções para iniciar e terminar o arrasto de uma peça, para mover uma peça e para reverter o estado para o anterior se uma jogada inválida for feita.
+    * Também atualiza o estado do jogo e verifica se o jogo acabou.
+    * 
+    * O estado do jogo é atualizado com os resultados de uma jogada e informações sobre xeque e xeque-mate.
+    */    
+
     state = {
         gameState: new Game(this.props.color),
-        draggedPieceTargetId: "", // empty string means no piece is being dragged
+        // string vazia significa que nenhuma peça está sendo arrastada
+        draggedPieceTargetId: "",
         playerTurnToMoveIsWhite: true,
         whiteKingInCheck: false, 
         blackKingInCheck: false
@@ -36,7 +44,7 @@ class ChessGame extends React.Component {
     componentDidMount() {
         console.log(this.props.myUserName)
         console.log(this.props.opponentUserName)
-        // register event listeners
+        // regista event listeners
         socket.on('opponent move', move => {
             // move == [pieceId, finalPosition]
             // console.log("opponenet's move: " + move.selectedId + ", " + move.finalPosition)
@@ -315,21 +323,15 @@ const ChessGameWrapper = (props) => {
       <React.Fragment>
         {opponentDidJoinTheGame ? (
           <div>
-            <h4> Opponent: {opponentUserName} </h4>
+            <h4> Adversário: {opponentUserName} </h4>
             <div style={{ display: "flex" }}>
               <ChessGame
                 playAudio={play}
                 gameId={gameid}
                 color={color.didRedirect}
               />
-              <VideoChatApp
-                mySocketId={socket.id}
-                opponentSocketId={opponentSocketId}
-                myUserName={props.myUserName}
-                opponentUserName={opponentUserName}
-              />
             </div>
-            <h4> You: {props.myUserName} </h4>
+            <h4> você: {props.myUserName} </h4>
           </div>
         ) : gameSessionDoesNotExist ? (
           <div>
@@ -343,8 +345,8 @@ const ChessGameWrapper = (props) => {
                 marginTop: String(window.innerHeight / 8) + "px",
               }}
             >
-              Hey <strong>{props.myUserName}</strong>, copy and paste the URL
-              below to send to your friend:
+              Hey <strong>{props.myUserName}</strong>, copia e cola a URL
+               abaixo para enviar ao seu amigo:
             </h1>
             <textarea
               style={{ marginLeft: String((window.innerWidth / 2) - 290) + "px", marginTop: "30" + "px", width: "580px", height: "30px"}}
@@ -359,7 +361,7 @@ const ChessGameWrapper = (props) => {
 
             <h1 style={{ textAlign: "center", marginTop: "100px" }}>
               {" "}
-              Waiting for other opponent to join the game...{" "}
+              Á espera do seu adversário para entrar no jogo...{" "}
             </h1>
           </div>
         )}
