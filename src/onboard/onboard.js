@@ -1,12 +1,16 @@
+/*
+* onboard.js
+*
+* Onboard é onde criamos a sala de jogo.
+*/
+
+// imports
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 import uuid from 'uuid/v4'
 import { ColorContext } from '../context/colorcontext' 
 const socket  = require('../connection/socket').socket
 
-/**
- * Onboard is where we create the game room.
- */
 
 class CreateNewGame extends React.Component {
     state = {
@@ -21,35 +25,36 @@ class CreateNewGame extends React.Component {
     }
     
     send = () => {
-        /**
-         * This method should create a new room in the '/' namespace
-         * with a unique identifier. 
-         */
+        /*
+        * Este método deve criar uma nova sala no namespace '/'
+        * com um identificador único.
+        */
         const newGameRoomId = uuid()
-
-        // set the state of this component with the gameId so that we can
-        // redirect the user to that URL later. 
+        
+        /*
+        * define o estado deste componente com o gameId para que seja possivel
+        * redirecionar o utilizador para esse URL posteriormente.
+        */
         this.setState({
             gameId: newGameRoomId
         })
 
-        // emit an event to the server to create a new room 
+        // emite um evento para o servidor para criar uma nova sala
         socket.emit('createNewGame', newGameRoomId)
     }
 
     typingUserName = () => {
-        // grab the input text from the field from the DOM 
+        // pega o texto de entrada do campo do DOM
         const typedText = this.textArea.current.value
         
-        // set the state with that text
+        // define o estado com esse texto
         this.setState({
             inputText: typedText
         })
     }
 
     render() {
-        // !!! TODO: edit this later once you have bought your own domain. 
-
+        // !!! TODO: edite isso mais tarde depois de comprar seu próprio domínio.
         return (<React.Fragment>
             {
                 this.state.didGetUserName ? 
@@ -68,9 +73,11 @@ class CreateNewGame extends React.Component {
                         style = {{marginLeft: String((window.innerWidth / 2) - 60) + "px", width: "120px", marginTop: "62px"}} 
                         disabled = {!(this.state.inputText.length > 0)} 
                         onClick = {() => {
-                            // When the 'Submit' button gets pressed from the username screen,
-                            // We should send a request to the server to create a new room with
-                            // the uuid we generate here.
+                            /*
+                            * Quando o botão 'Enviar' for pressionado na tela de nome de utilizador,
+                            * Devemos enviar uma solicitação ao servidor para criar uma nova sala com
+                            * o uuid que geramos aqui.
+                            */
                             this.props.didRedirect() 
                             this.props.setUserName(this.state.inputText) 
                             this.setState({

@@ -1,3 +1,5 @@
+// chessgame.js
+
 // imports necessários para o jogo de xadrez
 import React from 'react'
 import Game from '../model/chess'
@@ -42,12 +44,9 @@ class ChessGame extends React.Component {
 
 
     componentDidMount() {
-        console.log(this.props.myUserName)
-        console.log(this.props.opponentUserName)
         // regista event listeners
         socket.on('opponent move', move => {
             // move == [pieceId, finalPosition]
-            // console.log("opponenet's move: " + move.selectedId + ", " + move.finalPosition)
             if (move.playerColorThatJustMovedIsWhite !== this.props.color) {
                 this.movePiece(move.selectedId, move.finalPosition, this.state.gameState, false)
                 this.setState({
@@ -65,11 +64,11 @@ class ChessGame extends React.Component {
 
 
     movePiece = (selectedId, finalPosition, currentGame, isMyMove) => {
-        /**
-         * "update" is the connection between the model and the UI. 
-         * This could also be an HTTP request and the "update" could be the server response.
-         * (model is hosted on the server instead of the browser)
-         */
+        /*
+        * "update" é a conexão entre o modelo e a interface do utilizador.
+        * Isto também pode ser uma solicitação HTTP e a "update" pode ser a resposta do servidor.
+        * (o modelo esta host no servidor em vez do navegador)
+        */
         var whiteKingInCheck = false 
         var blackKingInCheck = false
         var blackCheckmated = false 
@@ -77,14 +76,14 @@ class ChessGame extends React.Component {
         const update = currentGame.movePiece(selectedId, finalPosition, isMyMove)
         
         if (update === "moved in the same position.") {
-            this.revertToPreviousState(selectedId) // pass in selected ID to identify the piece that messed up
+            // passe o ID selecionado para identificar a peça que fez um movimento inválido
+            this.revertToPreviousState(selectedId)
             return
         } else if (update === "user tried to capture their own piece") {
             this.revertToPreviousState(selectedId) 
             return
         } else if (update === "b is in check" || update === "w is in check") { 
-            // change the fill of the enemy king or your king based on which side is in check. 
-            // play a sound or something
+            // mude o preenchimento do rei enemigo ou do seu rei com base em qual lado está em xeque.
             if (update[0] === "b") {
                 blackKingInCheck = true
             } else {
@@ -101,7 +100,7 @@ class ChessGame extends React.Component {
             return
         } 
 
-        // let the server and the other client know your move
+        // permite que o servidor e o outro cliente saibam o que jogo
         if (isMyMove) {
             socket.emit('new move', {
                 nextPlayerColorToMove: !this.state.gameState.thisPlayersColorIsWhite,
@@ -114,8 +113,7 @@ class ChessGame extends React.Component {
         
 
         this.props.playAudio()   
-        
-        // sets the new game state. 
+        // define o novo estado do jogo. 
         this.setState({
             draggedPieceTargetId: "",
             gameState: currentGame,
@@ -141,9 +139,7 @@ class ChessGame extends React.Component {
     }
 
     revertToPreviousState = (selectedId) => {
-        /**
-         * Should update the UI to what the board looked like before. 
-         */
+        // Deve atualizar a interface do utilizador para a aparência anterior da placa.
         const oldGS = this.state.gameState
         const oldBoard = oldGS.getBoard()
         const tmpGS = new Game(true)
@@ -159,8 +155,7 @@ class ChessGame extends React.Component {
                 }
             }
         }
-
-        // temporarily remove the piece that was just moved
+        // remove temporariamente a peça que acabou de ser movida
         tmpGS.setBoard(tmpBoard)
 
         this.setState({
@@ -175,16 +170,13 @@ class ChessGame extends React.Component {
 
  
     inferCoord = (x, y, chessBoard) => {
-        // console.log("actual mouse coordinates: " + x + ", " + y)
-        /*
-            Should give the closest estimate for new position. 
-        */
+        // Deve dar a estimativa mais próxima para a nova posição.
         var hashmap = {}
         var shortestDistance = Infinity
         for (var i = 0; i < 8; i++) {
             for (var j = 0; j < 8; j++) {
                 const canvasCoord = chessBoard[i][j].getCanvasCoord()
-                // calculate distance
+                // calcular distancia
                 const delta_x = canvasCoord[0] - x 
                 const delta_y = canvasCoord[1] - y
                 const newDistance = Math.sqrt(delta_x**2 + delta_y**2)
@@ -198,14 +190,8 @@ class ChessGame extends React.Component {
         return hashmap[shortestDistance]
     }
    
-    render() {
-        // console.log(this.state.gameState.getBoard())
-       //  console.log("it's white's move this time: " + this.state.playerTurnToMoveIsWhite)
-        /*
-            Look at the current game state in the model and populate the UI accordingly
-        */
-        // console.log(this.state.gameState.getBoard())
-        
+    render() { 
+        // Observe o estado atual do jogo no modelo e preencha a Interface Utilizador de acordo
         return (
         <React.Fragment>
         <div style = {{
@@ -249,18 +235,7 @@ class ChessGame extends React.Component {
 
 
 const ChessGameWrapper = (props) => {
-    /**
-     * player 1
-     *      - socketId 1
-     *      - socketId 2 ???
-     * player 2
-     *      - socketId 2
-     *      - socketId 1
-     */
-
-
-
-    // get the gameId from the URL here and pass it to the chessGame component as a prop. 
+    // obtenha o gameId da URL aqui e passe-o para o componente chessGame como um "prop".
     const domainName = 'http://localhost:3000'
     const color = React.useContext(ColorContext)
     const { gameid } = useParams()
@@ -272,14 +247,12 @@ const ChessGameWrapper = (props) => {
 
     React.useEffect(() => {
         socket.on("playerJoinedRoom", statusUpdate => {
-            console.log("A new player has joined the room! Username: " + statusUpdate.userName + ", Game id: " + statusUpdate.gameId + " Socket id: " + statusUpdate.mySocketId)
             if (socket.id !== statusUpdate.mySocketId) {
                 setOpponentSocketId(statusUpdate.mySocketId)
             }
         })
     
         socket.on("status", statusUpdate => {
-            console.log(statusUpdate)
             alert(statusUpdate)
             if (statusUpdate === 'This game session does not exist.' || statusUpdate === 'There are already 2 people playing in this room.') {
                 doesntExist(true)
@@ -288,7 +261,6 @@ const ChessGameWrapper = (props) => {
         
     
         socket.on('start game', (opponentUserName) => {
-            console.log("START!")
             if (opponentUserName !== props.myUserName) {
                 setUserName(opponentUserName)
                 didJoinGame(true) 
@@ -303,7 +275,6 @@ const ChessGameWrapper = (props) => {
     
         socket.on('give userName', (socketId) => {
             if (socket.id !== socketId) {
-                console.log("give userName stage: " + props.myUserName)
                 socket.emit('recieved userName', {userName: props.myUserName, gameId: gameid})
             }
         })
@@ -311,7 +282,6 @@ const ChessGameWrapper = (props) => {
         socket.on('get Opponent UserName', (data) => {
             if (socket.id !== data.socketId) {
                 setUserName(data.userName)
-                console.log('data.socketId: data.socketId')
                 setOpponentSocketId(data.socketId)
                 didJoinGame(true) 
             }
@@ -351,7 +321,6 @@ const ChessGameWrapper = (props) => {
             <textarea
               style={{ marginLeft: String((window.innerWidth / 2) - 290) + "px", marginTop: "30" + "px", width: "580px", height: "30px"}}
               onFocus={(event) => {
-                  console.log('sd')
                   event.target.select()
               }}
               value = {domainName + "/game/" + gameid}

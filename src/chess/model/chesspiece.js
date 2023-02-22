@@ -1,22 +1,24 @@
 /*
+* chesspiece.js
+*
 * Este ficheiro contem uma classe para as peças de xadrez em JavaScript.
 * 
 * A classe possui um construtor que recebe como entrada as seguintes propriedades: name, isAttacked, color e id.
 * A classe também define dois métodos: setSquare e getSquare.
 *
-* O método setSquare permite definir o quadrado em que a peça está, usando o método setPiece do quadrado.
+* O método setSquare permite definir o quadrado em que a peça está usando o método setPiece do quadrado.
 * O método getSquare retorna o quadrado em que a peça está.
 */
 
 class ChessPiece {
     constructor(name, isAttacked, color, id) {
-        // name é uma variavel de tipo string que vai guardar o nome da peça.
+        // name é uma variável de tipo string que vai guardar o nome da peça.
         this.name = name
-        // isAttacked é uma variavel Boolean para saber se a peça esta a ser atacada (1 = atacado, 0 = não atacado).
+        // isAttacked é uma variável Boolean para saber se a peça esta a ser atacada (1 = atacado, 0 = não atacado).
         this.isAttacked = isAttacked 
-        // color é uma variavel de tipo string que vai guardar a cor da peça.
+        // color é uma variável de tipo string que vai guardar a cor da peça.
         this.color = color
-        // id é uma variavel de tipo string que vai guardar o numero de identificação da peça 
+        // id é uma variável de tipo string que vai guardar o numero de identificação da peça 
         this.id = id
     }
 
@@ -50,10 +52,10 @@ class ChessPiece {
     }
 
     getSquare() {
-        // obter o quadrado no qual a peça esta atualemente
+        // obter o quadrado no qual a peça esta atualmente
         return this.squareThisPieceIsOn
     }
 }
 
-// export para poder utilizar a class ChessPiece nos outros ficheiros
+// export para poder utilizar a classe ChessPiece nos outros ficheiros
 export default ChessPiece

@@ -1,13 +1,14 @@
 /* 
-* Classe Jogo
+* chess.js
 *
-* Esta é uma classe JavaScript que modela um jogo de xadrez.
-* Contem um constructor para definir a posição das peças e do tabuleiro em função do jogador (branco ou preto). 
-* O tabuleiro esta invertido para o outro jogador.
+* Neste ficheiro, encontra-se uma classe que modela um jogo de xadrez.
+* Contem um construtor para definir a posição das peças e do tabuleiro 
+* em função do jogador (branco ou preto). 
+* O tabuleiro está invertido para o outro jogador.
 *
 * Ela tem dois atributos principais: thisPlayersColorIsWhite e chessBoard.
-* O primeiro é uma flag boolean que indica se o jogador a jogar é branco ou preto.
-* O segundo é a representação atual do tabuleiro de xadrez.
+* O primeiro é uma flag boolean que indica se o jogador é branco ou preto.
+* O segundo é a representação lógica atual do tabuleiro de xadrez.
 *
 * O construtor da classe Game inicializa esses atributos e também cria um objeto chess usando a biblioteca chess.js.
 * Além disso, ele cria vários mapeamentos para ajudar a traduzir coordenadas entre as representações
@@ -103,7 +104,7 @@ class Game {
         * Se o movimento for válido, ele verifica se é uma promoção de peão com "this.isPawnPromotion".
         * Se a promoção for válida, o método promove o peão a rainha, caso contrário, faz a jogada.
         * 
-        * Finalemente, ele verifica se o movimento resultou em um roque com "this.isCastle".
+        * Finalmente, ele verifica se o movimento resultou em um roque com "this.isCastle".
         * Nesse caso, ele move a torre para sua nova posição.
         * O método atualiza o modelo do tabuleiro, defina a nova posição da peça e remove a posição original da peça.
         * Se um jogador tenta mexer para a sua própria posição, o método retornará "moved in the same position." (utilizador tentou mexer na mesma posição).
@@ -115,7 +116,6 @@ class Game {
         } : {
             105:7, 195:6, 285: 5, 375: 4, 465: 3, 555: 2, 645: 1, 735: 0
         }
-
 
         var currentBoard = this.getBoard()
         const pieceCoordinates = this.findPiece(currentBoard, pieceId)
@@ -243,7 +243,6 @@ class Game {
             return { didCastle: false }
         }
 
-
         // Modifica a posição do rei e da torre.
         let originalPositionOfRook
         let newPositionOfRook
@@ -262,7 +261,7 @@ class Game {
             newPositionOfRook = 'd8'
         }   
 
-        // Retorna os dados necessarios.
+        // Retorna os dados necessários.
         return {
             didCastle: true, 
             x: this.toAlphabetBlack[originalPositionOfRook[0]], 
@@ -273,7 +272,7 @@ class Game {
     }
 
     isPawnPromotion(to, piece) {
-        // verifica se o peão é eligivel para uma promoção
+        // verifica se o peão é elegível para uma promoção
 
         const isPromotionPossible = piece === 'p' && (to[1] === 105 || to[1] === 735)
         if (isPromotionPossible) {
@@ -349,5 +348,6 @@ class Game {
 
 }
 
-// export para poder utilizar a class Game nos outros ficheiros
+// export para poder utilizar a classe Game nos outros ficheiros
 export default Game
+

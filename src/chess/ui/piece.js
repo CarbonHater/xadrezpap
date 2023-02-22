@@ -1,3 +1,5 @@
+// piece.js
+
 // import necessários para este ficheiro
 import React from 'react'
 import { Image } from 'react-konva';
@@ -12,7 +14,7 @@ const Piece = (props) => {
     * "props.draggedPieceTargetId" é o id da peça que está a ser arrastada no momento.
     * "props.thisPlayersColorIsWhite" indica a cor das peças que o jogador está a utilisar.
     * "props.playerTurnToMoveIsWhite" indica a cor das peças que podem fazer um movimento.
-    * "props.whiteKingInCheck" e "props.blackKingInCheck" indicam se os reis branco e preto estão em xeque, respectivamente.
+    * "props.whiteKingInCheck" e "props.blackKingInCheck" indicam se os reis branco e preto estão em xeque, respetivamente.
     * 
     * Usa a biblioteca "useImage" para importar uma imagem com base na propriedade "choiceOfColor".
     * Usa o componente "Image" da biblioteca "react-konva" para exibir a peça de xadrez no tabuleiro.
@@ -33,6 +35,7 @@ const Piece = (props) => {
     const thisWhiteKingInCheck = props.id === "wk1" && props.whiteKingInCheck
     const thisBlackKingInCheck = props.id === "bk1" && props.blackKingInCheck
 
+    // Retorna as propriedades da peça.
     return <Image image={image}
          x = {props.x - 90}
          y = {props.y - 90}
@@ -46,5 +49,6 @@ const Piece = (props) => {
          />;
 };
 
-// export para poder utilisar nos outros ficheiros
+// export para poder utilizar nos outros ficheiros
 export default Piece
+

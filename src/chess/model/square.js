@@ -1,4 +1,6 @@
 /*
+* square.js
+*
 * Este ficheiro contem uma classe para os quadrados do tabuleiro de xadrez em JavaScript.
 *
 * A classe possui um construtor que define as seguintes propriedades: x, y, canvascoord e pieceOnThisSquare.
@@ -8,13 +10,13 @@
 
 class Square {
     constructor(x, y, pieceOnThisSquare, canvasCoord) {
-        // x é uma variavel de tipo int que vai guardar a coordenada x: 0 < x < 7  do quadrado.
+        // x é uma variável de tipo int que vai guardar a coordenada x: 0 < x < 7  do quadrado.
         this.x = x
-        // y é uma variavel de tipo int que vai guardar a coordenada y: 0 < y < 7  do quadrado.
+        // y é uma variável de tipo int que vai guardar a coordenada y: 0 < y < 7  do quadrado.
         this.y = y 
-        // canvasCoord é uma variavel que vai guardar a coordenada no tabuleiro.
+        // canvasCoord é uma variável que vai guardar a coordenada no tabuleiro.
         this.canvasCoord = canvasCoord
-        // pieceOnThisSquare é uma variavel que que permite saber se uma peça esta sobre este quadrado.
+        // pieceOnThisSquare é uma variável que que permite saber se uma peça esta sobre este quadrado.
         this.pieceOnThisSquare = pieceOnThisSquare
     }
 
@@ -23,7 +25,7 @@ class Square {
         * setPiece recebe um argumento newPiece.
         * Este método é usado para atribuir uma peça a um quadrado, remover uma peça de um quadrado ou substituir a peça num quadrado por uma peça diferente.
         * 
-        * Dependendo dos valores de newPiece e da peça atual no quadrado, existem diferentes casos para o que a a função faz.
+        * Dependendo dos valores de newPiece e da peça atual no quadrado, existem diferentes casos para o que a função faz.
         * Se newPiece não for nulo e houver peça no quadrado, e as peças forem de cores diferentes, a função substitui a peça no quadrado por newPiece e define a posição de newPiece como o quadrado atual.
         * Se as peças forem da mesma cor, a função retorna a string "user tried to capture their own piece".
         */
@@ -43,7 +45,6 @@ class Square {
         } else if (this.getPieceIdOnThisSquare() != newPiece.id && this.pieceOnThisSquare.color != newPiece.color) {
             // (Captura)
             // Caso em que o chamador da função deseja alterar a peça neste quadrado. (somente cores diferentes são permitidas).
-            console.log("capture!")
             this.pieceOnThisSquare = newPiece
             newPiece.setSquare(this)
         } else {
@@ -63,7 +64,7 @@ class Square {
     }
 
     getPieceIdOnThisSquare() {
-        // Obter o numero de identificação da peça que esta neste quadrado
+        // Obter o número de identificação da peça que esta neste quadrado
         // Retorne "empty" se não estiver nenhuma peça no quadrado
         if (this.pieceOnThisSquare === null) {
             return "empty"
@@ -78,15 +79,15 @@ class Square {
     }
 
     getCoord() {
-        // Obtem as coordonadas da peça  
+        // Obtém as coordonadas da peça  
         return [this.x, this.y]
     }
 
     getCanvasCoord() {
-        // Obtem as coordonadas no tabuleiro  
+        // Obtém as coordonadas no tabuleiro  
         return this.canvasCoord
     }
 }
 
-// Export para poder utilizar a classe "Square" nos outros ficheiros
+// export para poder utilizar a classe "Square" nos outros ficheiros
 export default Square

@@ -1,22 +1,15 @@
+/*
+* joingame.js
+*
+* joingame é onde realmente entramos na página de jogo
+*/
+
+// imports
 import React from 'react'
 import { useParams } from 'react-router-dom'
 const socket  = require('../connection/socket').socket
-
-/**
- * 'Join game' is where we actually join the game room. 
- */
-
-
 const JoinGameRoom = (gameid, userName, isCreator) => {
-    /**
-     * For this browser instance, we want 
-     * to join it to a gameRoom. For now
-     * assume that the game room exists 
-     * on the backend. 
-     *  
-     * 
-     * TODO: handle the case when the game room doesn't exist. 
-     */
+    // Para esta instância do navegador, queremos juntá-lo a um gameRoom.
     const idData = {
         gameId : gameid,
         userName : userName,
@@ -27,10 +20,7 @@ const JoinGameRoom = (gameid, userName, isCreator) => {
   
   
 const JoinGame = (props) => {
-    /**
-     * Extract the 'gameId' from the URL. 
-     * the 'gameId' is the gameRoom ID. 
-     */
+    //Extraia o 'gameId' do URL. O 'gameId' é o ID do gameRoom.
     const { gameid } = useParams()
     JoinGameRoom(gameid, props.userName, props.isCreator)
     return <div>

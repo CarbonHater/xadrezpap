@@ -1,8 +1,12 @@
-// Link das imagens das peças do jogo de xadrez 
-
-// no futuro, será possivel utilizar as minhas imagens.
-
-// export para poder utilisar nos outros ficheiros
+/*
+* piecemap.js
+*
+* Link das imagens das peças do jogo de xadrez.
+*
+* No futuro, será possível utilizar as minhas próprias imagens.
+*
+* export para poder utilizar nos outros ficheiros
+*/
 export default {
     'pawn': ['https://upload.wikimedia.org/wikipedia/commons/0/04/Chess_plt60.png', 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Chess_pdt60.png'],
     'knight':['https://upload.wikimedia.org/wikipedia/commons/2/28/Chess_nlt60.png','https://upload.wikimedia.org/wikipedia/commons/f/f1/Chess_ndt60.png'],
