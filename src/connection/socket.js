@@ -2,12 +2,14 @@
 
 import io from 'socket.io-client'
 
-const URL = 'http://localhost:8000'
-
-const socket = io(URL)
+const socket = io("http://localhost:8000");
 
 var mySocketId
 // Registe event listeners preliminares aqui:
+
+socket.on('connection', () => {
+    console.log("new client connected")
+})
 
 socket.on("createNewGame", statusUpdate => {
     mySocketId = statusUpdate.mySocketId
