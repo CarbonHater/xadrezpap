@@ -123,9 +123,9 @@ class ChessGame extends React.Component {
         })
 
         if (blackCheckmated) {
-            alert("WHITE WON BY CHECKMATE!")
+            alert("BRANCO GANHOU POR XEQUE-MATE!")
         } else if (whiteCheckmated) {
-            alert("BLACK WON BY CHECKMATE!")
+            alert("PRETO GANHOU POR XEQUE-MATE!")
         }
     }
 
@@ -254,7 +254,7 @@ const ChessGameWrapper = (props) => {
     
         socket.on("status", statusUpdate => {
             alert(statusUpdate)
-            if (statusUpdate === 'This game session does not exist.' || statusUpdate === 'There are already 2 people playing in this room.') {
+            if (statusUpdate === 'Esta sessão de jogo não existe.' || statusUpdate === 'Já há 2 pessoas a jogar nesta sala.') {
                 doesntExist(true)
             }
         })
