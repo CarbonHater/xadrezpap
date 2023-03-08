@@ -259,19 +259,14 @@ const ChessGameWrapper = (props) => {
             }
         })
         
-    
         socket.on('start game', (opponentUserName) => {
             if (opponentUserName !== props.myUserName) {
                 setUserName(opponentUserName)
                 didJoinGame(true) 
             } else {
-                // in chessGame, pass opponentUserName as a prop and label it as the enemy. 
-                // in chessGame, use reactContext to get your own userName
-                // socket.emit('myUserName')
                 socket.emit('request username', gameid)
             }
         })
-    
     
         socket.on('give userName', (socketId) => {
             if (socket.id !== socketId) {
@@ -286,7 +281,7 @@ const ChessGameWrapper = (props) => {
                 didJoinGame(true) 
             }
         })
-    }, [])
+    }, [gameid, props.myUserName])
 
 
     return (
@@ -319,7 +314,7 @@ const ChessGameWrapper = (props) => {
                abaixo para enviar ao seu amigo:
             </h1>
             <textarea
-              style={{ marginLeft: String((window.innerWidth / 2) - 290) + "px", marginTop: "30" + "px", width: "580px", height: "30px"}}
+              style={{ marginLeft: `${String((window.innerWidth / 2) - 290)}px`, marginTop: "30px", width: "580px", height: "30px"}}
               onFocus={(event) => {
                   event.target.select()
               }}

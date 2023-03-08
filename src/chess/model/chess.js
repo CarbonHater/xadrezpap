@@ -19,7 +19,7 @@
 */
 
 // importa os outros ficheiros e a biblioteca chess.js
-import Chess from 'chess.js'
+import { Chess } from 'chess.js'
 import ChessPiece from './chesspiece'
 import Square from './square'
 
@@ -329,9 +329,9 @@ class Game {
         const whiteBackRankId = ["wr1", "wn1", "wb1", "wq1", "wk1", "wb2", "wn2", "wr2"]
         const blackBackRankId = ["br1", "bn1", "bb1", "bq1", "bk1", "bb2", "bn2", "br2"]
 
-        for (var j = 0; j < 8; j += 7) {
-            for (var i = 0; i < 8; i++) {
-                if (j == 0) {
+        for (j = 0; j < 8; j += 7) {
+            for (i = 0; i < 8; i++) {
+                if (j === 0) {
                     // linha superior
                     startingChessBoard[j][this.thisPlayersColorIsWhite ? i : 7 - i].setPiece(new ChessPiece(backRank[i], false, this.thisPlayersColorIsWhite ? "black" : "white", this.thisPlayersColorIsWhite ? blackBackRankId[i] : whiteBackRankId[i]))
                     startingChessBoard[j + 1][this.thisPlayersColorIsWhite ? i : 7 - i].setPiece(new ChessPiece("pawn", false, this.thisPlayersColorIsWhite ? "black" : "white", this.thisPlayersColorIsWhite ? "bp" + i : "wp" + i))

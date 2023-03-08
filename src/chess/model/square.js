@@ -42,7 +42,7 @@ class Square {
             // Se newPiece não for nulo e não houver peça no quadrado, a função atribui newPiece ao quadrado e define a posição de newPiece como o quadrado atual.
             this.pieceOnThisSquare = newPiece
             newPiece.setSquare(this)
-        } else if (this.getPieceIdOnThisSquare() != newPiece.id && this.pieceOnThisSquare.color != newPiece.color) {
+        } else if (this.getPieceIdOnThisSquare() !== newPiece.id && this.pieceOnThisSquare.color !== newPiece.color) {
             // (Captura)
             // Caso em que o chamador da função deseja alterar a peça neste quadrado. (somente cores diferentes são permitidas).
             this.pieceOnThisSquare = newPiece
