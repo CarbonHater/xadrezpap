@@ -7,7 +7,7 @@
 // imports
 import React from 'react'
 import { Redirect } from 'react-router-dom'
-import uuid from 'uuid/v4'
+import { v4 as uuidv4 } from 'uuid';
 import { ColorContext } from '../context/colorcontext' 
 const socket  = require('../connection/socket').socket
 
@@ -29,7 +29,7 @@ class CreateNewGame extends React.Component {
         * Este método deve criar uma nova sala no namespace '/'
         * com um identificador único.
         */
-        const newGameRoomId = uuid()
+        const newGameRoomId = uuidv4()
         
         /*
         * define o estado deste componente com o gameId para que seja possivel
