@@ -41,14 +41,14 @@ class JoinRoom extends React.Component {
                 </React.Fragment>
             :
                <div>
-                    <h1 style={{textAlign: "center", marginTop: String((window.innerHeight / 3)) + "px"}}>Nome de utilizador:</h1>
+                    <h1 style={{color: "snow", textAlign: "center", marginTop: String((window.innerHeight / 3)) + "px"}}>Nome de utilizador:</h1>
 
                     <input style={{marginLeft: String((window.innerWidth / 2) - 120) + "px", width: "240px", marginTop: "62px"}} 
                            ref = {this.textArea}
                            onInput = {this.typingUserName}></input>
                            
                     <button className="btn btn-primary" 
-                        style = {{marginLeft: String((window.innerWidth / 2) - 60) + "px", width: "120px", marginTop: "62px"}} 
+                        style = {{color: "snow", backgroundColor: "#36393e", marginLeft: String((window.innerWidth / 2) - 60) + "px", width: "120px", marginTop: "62px"}} 
                         disabled = {!(this.state.inputText.length > 0)} 
                         onClick = {() => {
                             /* 

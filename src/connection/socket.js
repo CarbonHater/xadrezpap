@@ -1,9 +1,10 @@
 // socket.js
 
-import { io } from "socket.io-client";
+import io from 'socket.io-client'
 
-const URL = "http://localhost:3000";
-const socket = io(URL);
+const URL = 'http://localhost:8000'
+
+const socket = io(URL)
 
 var mySocketId
 // Registe event listeners preliminares aqui:
