@@ -292,8 +292,8 @@ const ChessGameWrapper = (props) => {
     return (
       <React.Fragment>
         {opponentDidJoinTheGame ? (
-          <div>
-            <h4> Adversário: {opponentUserName} </h4>
+          <div style={{marginLeft: "600px"}}>
+            <h4 style={{color: "snow"}}> Adversário: {opponentUserName} </h4>
             <div style={{ display: "flex" }}>
               <ChessGame
                 playAudio={play}
@@ -301,7 +301,7 @@ const ChessGameWrapper = (props) => {
                 color={color.didRedirect}
               />
             </div>
-            <h4> você: {props.myUserName} </h4>
+            <h4 style={{color: "snow"}}> você: {props.myUserName} </h4>
           </div>
         ) : gameSessionDoesNotExist ? (
           <div>
@@ -311,6 +311,7 @@ const ChessGameWrapper = (props) => {
           <div>
             <h1
               style={{
+                color: "snow",
                 textAlign: "center",
                 marginTop: String(window.innerHeight / 8) + "px",
               }}
@@ -328,7 +329,7 @@ const ChessGameWrapper = (props) => {
               </textarea>
             <br></br>
 
-            <h1 style={{ textAlign: "center", marginTop: "100px" }}>
+            <h1 style={{color: "snow", textAlign: "center", marginTop: "100px" }}>
               {" "}
               Á espera do seu adversário para entrar no jogo...{" "}
             </h1>

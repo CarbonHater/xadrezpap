@@ -7,7 +7,7 @@
 // imports
 import React from 'react'
 import { Redirect } from 'react-router-dom'
-import uuid from 'uuid/v4'
+import { v4 as uuidv4 } from 'uuid';
 import { ColorContext } from '../context/colorcontext' 
 const socket  = require('../connection/socket').socket
 
@@ -29,7 +29,7 @@ class CreateNewGame extends React.Component {
         * Este método deve criar uma nova sala no namespace '/'
         * com um identificador único.
         */
-        const newGameRoomId = uuid()
+        const newGameRoomId = uuidv4()
         
         /*
         * define o estado deste componente com o gameId para que seja possivel
@@ -59,18 +59,18 @@ class CreateNewGame extends React.Component {
             {
                 this.state.didGetUserName ? 
 
-                <Redirect to = {"/game/" + this.state.gameId}><button className="btn btn-success" style = {{marginLeft: String((window.innerWidth / 2) - 60) + "px", width: "120px"}}>Começar o jogo</button></Redirect>
+                <Redirect to = {"/game/" + this.state.gameId}><button className="btn btn-success" style = {{color: "snow", backgroundColor: "#7289da", marginLeft: String((window.innerWidth / 2) - 60) + "px", width: "120px"}}>Começar o jogo</button></Redirect>
 
             :
                <div>
-                    <h1 style={{textAlign: "center", marginTop: String((window.innerHeight / 3)) + "px"}}>Nome de Utilizador:</h1>
+                    <h1 style={{color: "snow", textAlign: "center", marginTop: String((window.innerHeight / 3)) + "px"}}>Nome de Utilizador:</h1>
 
                     <input style={{marginLeft: String((window.innerWidth / 2) - 120) + "px", width: "240px", marginTop: "62px"}} 
                            ref = {this.textArea}
                            onInput = {this.typingUserName}></input>
                            
                     <button className="btn btn-primary" 
-                        style = {{marginLeft: String((window.innerWidth / 2) - 60) + "px", width: "120px", marginTop: "62px"}} 
+                        style = {{color: "snow", backgroundColor: "#36393e", marginLeft: String((window.innerWidth / 2) - 60) + "px", width: "120px", marginTop: "62px"}} 
                         disabled = {!(this.state.inputText.length > 0)} 
                         onClick = {() => {
                             /*
