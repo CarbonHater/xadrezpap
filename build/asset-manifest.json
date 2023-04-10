@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.js": "/static/js/main.360b6acf.js",
+    "static/js/845.edc5b746.chunk.js": "/static/js/845.edc5b746.chunk.js",
+    "static/media/moveSoundEffect.mp3": "/static/media/moveSoundEffect.d7687e92f098544c77d3.mp3",
+    "index.html": "/index.html",
+    "main.360b6acf.js.map": "/static/js/main.360b6acf.js.map",
+    "845.edc5b746.chunk.js.map": "/static/js/845.edc5b746.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.360b6acf.js"
+  ]
+}
