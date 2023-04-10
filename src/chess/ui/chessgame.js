@@ -236,7 +236,7 @@ class ChessGame extends React.Component {
 
 const ChessGameWrapper = (props) => {
     // obtenha o gameId da URL aqui e passe-o para o componente chessGame como um "prop".
-    const domainName = 'http://localhost:3000'
+    const domainName = 'https://xadrez-pap.com'
     const color = React.useContext(ColorContext)
     const { gameid } = useParams()
     const [play] = useSound(chessMove);
@@ -254,7 +254,7 @@ const ChessGameWrapper = (props) => {
     
         socket.on("status", statusUpdate => {
             alert(statusUpdate)
-            if (statusUpdate === 'Esta sessão de jogo não existe.' || statusUpdate === 'Já há 2 pessoas a jogar nesta sala.') {
+            if (statusUpdate === 'Esta sessão de jogo não existe.' || statusUpdate === 'Já há duas pessoas a jogar nesta sala.') {
                 doesntExist(true)
             }
         })
@@ -293,7 +293,7 @@ const ChessGameWrapper = (props) => {
       <React.Fragment>
         {opponentDidJoinTheGame ? (
           <div style={{marginLeft: "600px"}}>
-            <h4 style={{color: "snow"}}> Adversário: {opponentUserName} </h4>
+            <h4 style={{color: "snow"}}>{opponentUserName} </h4>
             <div style={{ display: "flex" }}>
               <ChessGame
                 playAudio={play}
@@ -301,7 +301,7 @@ const ChessGameWrapper = (props) => {
                 color={color.didRedirect}
               />
             </div>
-            <h4 style={{color: "snow"}}> você: {props.myUserName} </h4>
+            <h4 style={{color: "snow"}}>{props.myUserName} </h4>
           </div>
         ) : gameSessionDoesNotExist ? (
           <div>
@@ -317,7 +317,7 @@ const ChessGameWrapper = (props) => {
               }}
             >
               Hey <strong>{props.myUserName}</strong>, copia e cola a URL
-               abaixo para enviar ao seu amigo:
+               abaixo para enviar ao teu amigo:
             </h1>
             <textarea
               style={{ marginLeft: String((window.innerWidth / 2) - 290) + "px", marginTop: "30" + "px", width: "580px", height: "30px"}}
@@ -331,7 +331,7 @@ const ChessGameWrapper = (props) => {
 
             <h1 style={{color: "snow", textAlign: "center", marginTop: "100px" }}>
               {" "}
-              Á espera do seu adversário para entrar no jogo...{" "}
+              Á espera do teu adversário para começar o jogo...{" "}
             </h1>
           </div>
         )}
